@@ -1,0 +1,22 @@
+{
+	"info": {
+		"_postman_id": "49f2fc96-bff1-4770-938f-9d8318cace0d",
+		"name": "Eureka API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25828773-49f2fc96-bff1-4770-938f-9d8318cace0d"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"id": "b4ef920b-fe78-416a-8bde-bb9412b6d386",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
