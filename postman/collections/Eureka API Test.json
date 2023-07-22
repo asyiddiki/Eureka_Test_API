@@ -8,15 +8,157 @@
 	"item": [
 		{
 			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7fe995d2-15d5-4d4d-9d3e-93de56e39499",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name field matches expected value\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Product X\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Price field is a numeric value and greater than zero\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.be.a(\"number\");\r",
+							"    pm.expect(jsonData.price).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Inventory field is present and has a boolean value for 'available'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.inventory).to.exist;\r",
+							"    pm.expect(jsonData.inventory.available).to.be.a(\"boolean\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quantity field is a numeric value greater than zero\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.inventory.quantity).to.be.a(\"number\");\r",
+							"    pm.expect(jsonData.inventory.quantity).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Categories field contains at least one category with 'id' and 'name' fields\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.categories).to.be.an(\"array\").that.is.not.empty;\r",
+							"    jsonData.categories.forEach(function (category) {\r",
+							"        pm.expect(category.id).to.exist;\r",
+							"        pm.expect(category.name).to.exist;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reviews field is an array containing at least one review\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.reviews).to.be.an(\"array\").that.is.not.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each review in the reviews field has 'id', 'user', 'rating', and 'comment' fields\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    jsonData.reviews.forEach(function (review) {\r",
+							"        pm.expect(review.id).to.exist;\r",
+							"        pm.expect(review.user).to.exist;\r",
+							"        pm.expect(review.rating).to.exist;\r",
+							"        pm.expect(review.comment).to.exist;\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"id": "b4ef920b-fe78-416a-8bde-bb9412b6d386",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{Eureka}}/v3/0e2de2af-4793-4c89-af96-bdc1d52e9212",
+					"host": [
+						"{{Eureka}}"
+					],
+					"path": [
+						"v3",
+						"0e2de2af-4793-4c89-af96-bdc1d52e9212"
+					]
+				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a573b4c0-9526-4208-a666-80297619191b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f4165bef-7bc1-4b4e-8bb7-725e4627e66c",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"Name field matches expected value\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.name).to.eql(\"Product X\");",
+					"});",
+					"",
+					"pm.test(\"Price field is a numeric value and greater than zero\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.price).to.be.a(\"number\");",
+					"    pm.expect(jsonData.price).to.be.above(0);",
+					"});",
+					"",
+					"pm.test(\"Inventory field is present and has a boolean value for 'available'\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.inventory).to.exist;",
+					"    pm.expect(jsonData.inventory.available).to.be.a(\"boolean\");",
+					"});",
+					"",
+					"pm.test(\"Quantity field is a numeric value greater than zero\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.inventory.quantity).to.be.a(\"number\");",
+					"    pm.expect(jsonData.inventory.quantity).to.be.above(0);",
+					"});",
+					"",
+					"pm.test(\"Categories field contains at least one category with 'id' and 'name' fields\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.categories).to.be.an(\"array\").that.is.not.empty;",
+					"    jsonData.categories.forEach(function (category) {",
+					"        pm.expect(category.id).to.exist;",
+					"        pm.expect(category.name).to.exist;",
+					"    });",
+					"});",
+					"",
+					"pm.test(\"Reviews field is an array containing at least one review\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    pm.expect(jsonData.reviews).to.be.an(\"array\").that.is.not.empty;",
+					"});",
+					"",
+					"pm.test(\"Each review in the reviews field has 'id', 'user', 'rating', and 'comment' fields\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    jsonData.reviews.forEach(function (review) {",
+					"        pm.expect(review.id).to.exist;",
+					"        pm.expect(review.user).to.exist;",
+					"        pm.expect(review.rating).to.exist;",
+					"        pm.expect(review.comment).to.exist;",
+					"    });",
+					"});"
+				]
+			}
 		}
 	]
 }
